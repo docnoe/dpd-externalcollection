@@ -1,0 +1,22 @@
+{
+  "name": "dpd-externalcollection",
+  "description": "Deployd plugin. Store a collectin in a different mongodb instance",
+  "version": "0.0.1",
+  "homepage": "https://github.com/docnoe/dpd-externalcollection",
+  "bugs": "https://github.com/docnoe/dpd-externalcollection/issues",
+  "license": "MIT",
+  "main": "index.js",
+  "author": {
+    "name": "Johannes Noe",
+    "email": "info@johannesnoe.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/docnoe/dpd-externalcollection"
+  },
+  "keywords": ["dpd", "Deployd", "multiple mongodb"],
+  "dependencies": {
+    "debug": "2.2.0",
+    "underscore": "^1.8.3"
+  }
+}
