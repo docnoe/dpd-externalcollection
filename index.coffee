@@ -17,16 +17,17 @@ class ExternalCollection
   @defaultPath = "/external"
   constructor: (name, options) ->
     config = options.config if options
-    if config and config.host and config.port and config.name and not externalDbs[name]
+    if config and config.host and config.port and config.name
+      dbConfigAsString = "#{config.host}#{config.port}#{config.name}"
+      if not externalDbs[dbConfigAsString]
         debug "creating new store"
 
-        connector = new Connector(config)
-        externalDbs[name] = {}
-        externalDbs[name].db = connector.db
+        externalDbs[dbConfigAsString] = {}
+        externalDbs[dbConfigAsString].db = new Connector(config).db
 
-    options.db = externalDbs[name] and externalDbs[name].db or options.db
+    options.db = externalDbs[dbConfigAsString] and externalDbs[dbConfigAsString].db or options.db
     Collection.apply this, [name, options]
-    @properties = {}  unless @properties
+    @properties = {} unless @properties
     return
 
 util.inherits ExternalCollection, Collection
