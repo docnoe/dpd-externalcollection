@@ -28,6 +28,21 @@ ExternalCollection = (function() {
 
   ExternalCollection.defaultPath = "/external";
 
+  ExternalCollection.basicDashboard = {
+    settings: [
+      {
+        name: 'host',
+        type: 'text'
+      }, {
+        name: 'port',
+        type: 'number'
+      }, {
+        name: 'name',
+        type: 'text'
+      }
+    ]
+  };
+
   function ExternalCollection(name, options) {
     var config, connector;
     if (options) {
@@ -52,22 +67,5 @@ ExternalCollection = (function() {
 })();
 
 util.inherits(ExternalCollection, Collection);
-
-console.log(ExternalCollection.dashboard);
-
-ExternalCollection.basicDashboard = {
-  settings: [
-    {
-      name: 'host',
-      type: 'text'
-    }, {
-      name: 'port',
-      type: 'number'
-    }, {
-      name: 'name',
-      type: 'text'
-    }
-  ]
-};
 
 module.exports = ExternalCollection;

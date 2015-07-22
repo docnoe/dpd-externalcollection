@@ -15,6 +15,18 @@ class ExternalCollection
   @events = _.clone(Collection.events)
   @label = "External Collection"
   @defaultPath = "/external"
+  @basicDashboard =
+    settings: [{
+      name: 'host'
+      type: 'text'
+    }, {
+      name: 'port'
+      type: 'number'
+    }, {
+      name: 'name'
+      type: 'text'
+    }]
+
   constructor: (name, options) ->
     config = options.config if options
     if config and config.host and config.port and config.name and not externalDbs[name]
@@ -30,20 +42,5 @@ class ExternalCollection
     return
 
 util.inherits ExternalCollection, Collection
-# ExternalCollection.dashboard = _.clone Collection.dashboard
-console.log ExternalCollection.dashboard
-ExternalCollection.basicDashboard =
-  settings: [{
-    name: 'host'
-    type: 'text'
-  }, {
-    name: 'port'
-    type: 'number'
-  }, {
-    name: 'name'
-    type: 'text'
-  }]
-
-
 module.exports = ExternalCollection
 
