@@ -44,17 +44,19 @@ ExternalCollection = (function() {
   };
 
   function ExternalCollection(name, options) {
-    var config, connector;
+    var config, dbConfigAsString;
     if (options) {
       config = options.config;
     }
-    if (config && config.host && config.port && config.name && !externalDbs[name]) {
-      debug("creating new store");
-      connector = new Connector(config);
-      externalDbs[name] = {};
-      externalDbs[name].db = connector.db;
+    if (config && config.host && config.port && config.name) {
+      dbConfigAsString = "" + config.host + config.port + config.name;
+      if (!externalDbs[dbConfigAsString]) {
+        debug("creating new store");
+        externalDbs[dbConfigAsString] = {};
+        externalDbs[dbConfigAsString].db = new Connector(config).db;
+      }
     }
-    options.db = externalDbs[name] && externalDbs[name].db || options.db;
+    options.db = externalDbs[dbConfigAsString] && externalDbs[dbConfigAsString].db || options.db;
     Collection.apply(this, [name, options]);
     if (!this.properties) {
       this.properties = {};
