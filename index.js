@@ -3,7 +3,7 @@ var Collection, Connector, EventEmitter, ExternalCollection, debug, externalDbs,
 
 util = require("util");
 
-Collection = require("deployd/lib/resources/collection");
+Collection = require(require.main.paths[0] + "/deployd/lib/resources/collection");
 
 EventEmitter = require("events").EventEmitter;
 
@@ -16,6 +16,18 @@ Connector = require("./lib/connector");
 externalDbs = {};
 
 ExternalCollection = (function() {
+  ExternalCollection.prototype.clientGeneration = true;
+
+  ExternalCollection.dashboard = JSON.parse(JSON.stringify(Collection.dashboard));
+
+  ExternalCollection.dashboard.pages.push("config");
+
+  ExternalCollection.events = _.clone(Collection.events);
+
+  ExternalCollection.label = "External Collection";
+
+  ExternalCollection.defaultPath = "/external";
+
   function ExternalCollection(name, options) {
     var config, connector;
     if (options) {
@@ -41,7 +53,7 @@ ExternalCollection = (function() {
 
 util.inherits(ExternalCollection, Collection);
 
-ExternalCollection.dashboard = Collection.dashboard;
+console.log(ExternalCollection.dashboard);
 
 ExternalCollection.basicDashboard = {
   settings: [
@@ -57,15 +69,5 @@ ExternalCollection.basicDashboard = {
     }
   ]
 };
-
-ExternalCollection.prototype.clientGeneration = true;
-
-ExternalCollection.dashboard.pages.push("config");
-
-ExternalCollection.events = _.clone(Collection.events);
-
-ExternalCollection.label = "External Collection";
-
-ExternalCollection.defaultPath = "/external";
 
 module.exports = ExternalCollection;

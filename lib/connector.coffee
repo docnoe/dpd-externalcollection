@@ -1,4 +1,5 @@
-deployd = require "deployd"
+path = require 'path'
+deployd = require path.normalize "#{require.main.paths[0]}/deployd"
 Connector = (dbOptions) ->
   config =
     db:
@@ -7,5 +8,4 @@ Connector = (dbOptions) ->
       name: dbOptions.name
 
   connector = deployd(config)
-
 module.exports = Connector
