@@ -16,7 +16,17 @@ Connector = require("./lib/connector");
 externalDbs = {};
 
 ExternalCollection = (function() {
+  ExternalCollection.prototype.clientGeneration = true;
+
   ExternalCollection.dashboard = JSON.parse(JSON.stringify(Collection.dashboard));
+
+  ExternalCollection.dashboard.pages.push("config");
+
+  ExternalCollection.events = _.clone(Collection.events);
+
+  ExternalCollection.label = "External Collection";
+
+  ExternalCollection.defaultPath = "/external";
 
   function ExternalCollection(name, options) {
     var config, connector;
@@ -59,17 +69,5 @@ ExternalCollection.basicDashboard = {
     }
   ]
 };
-
-ExternalCollection.prototype.clientGeneration = true;
-
-ExternalCollection.dashboard.pages.push("config");
-
-ExternalCollection.dashboard.pages.push("configu");
-
-ExternalCollection.events = _.clone(Collection.events);
-
-ExternalCollection.label = "External Collection";
-
-ExternalCollection.defaultPath = "/external";
 
 module.exports = ExternalCollection;

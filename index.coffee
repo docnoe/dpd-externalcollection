@@ -9,7 +9,12 @@ Connector = require "./lib/connector"
 externalDbs = {}
 
 class ExternalCollection
+  @prototype.clientGeneration = true;
   @dashboard = JSON.parse(JSON.stringify(Collection.dashboard))
+  @dashboard.pages.push "config"
+  @events = _.clone(Collection.events)
+  @label = "External Collection"
+  @defaultPath = "/external"
   constructor: (name, options) ->
     config = options.config if options
     if config and config.host and config.port and config.name and not externalDbs[name]
@@ -39,11 +44,6 @@ ExternalCollection.basicDashboard =
     type: 'text'
   }]
 
-ExternalCollection.prototype.clientGeneration = true;
-ExternalCollection.dashboard.pages.push "config"
-ExternalCollection.dashboard.pages.push "configu"
-ExternalCollection.events = _.clone(Collection.events)
-ExternalCollection.label = "External Collection"
-ExternalCollection.defaultPath = "/external"
+
 module.exports = ExternalCollection
 
