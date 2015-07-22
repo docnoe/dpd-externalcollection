@@ -3,7 +3,7 @@ var Collection, Connector, EventEmitter, ExternalCollection, debug, externalDbs,
 
 util = require("util");
 
-Collection = require("deployd/lib/resources/collection");
+Collection = require(require.main.paths[0] + "/deployd/lib/resources/collection");
 
 EventEmitter = require("events").EventEmitter;
 
